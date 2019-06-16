@@ -7,7 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 
-@protocol RollBannerTouchProtocol <NSObject>
+@protocol WXMRollBannerTouchProtocol <NSObject>
 - (void)rollBannertouchEvents:(NSInteger)index;
 @end
 
@@ -26,12 +26,12 @@ typedef enum {
     ChangeModeFade     /** 淡入淡出 */
 } ChangeMode;
 
-@interface RollBanner : UIView
+@interface WXMRollBannerView : UIView
 
 #pragma mark 属性
 
 @property (nonatomic, copy) NSString* cacheKey;                       /** 缓存key */
-@property (nonatomic, weak) id <RollBannerTouchProtocol>delegate;     /** 代理 */
+@property (nonatomic, weak) id <WXMRollBannerTouchProtocol>delegate;     /** 代理 */
 @property (nonatomic, assign) ChangeMode changeMode;                  /** 图片切换的模式 */
 @property (nonatomic, assign) PageControlPosition pagePosition;       /** 分页控件位置 */
 @property (nonatomic, strong) NSArray *imageArray;                    /** 轮播的图片数组 */
@@ -41,7 +41,7 @@ typedef enum {
 
 #pragma mark 构造方法
 - (instancetype)initWithFrame:(CGRect)frame imageArray:(NSArray *)imageArray;
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<RollBannerTouchProtocol>)delegate;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<WXMRollBannerTouchProtocol>)delegate;
 + (instancetype)carouselViewWithImageArray:(NSArray *)imageArray describeArray:(NSArray *)describeArray;
 
 #pragma mark 方法

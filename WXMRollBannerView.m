@@ -4,7 +4,7 @@
 //
 //  Created by Mac on 16/9/12.
 //  Copyright © 2016年 WQ. All rights reserved.
-#import "RollBanner.h"
+#import "WXMRollBannerView.h"
 #define KWidth [UIScreen mainScreen].bounds.size.width
 #define KLibraryboxPath \
 NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject
@@ -15,7 +15,7 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
 #define VERMARGIN 5
 #define DES_LABEL_H 20 /** 标题栏的高度 */
 
-@interface RollBanner () <UIScrollViewDelegate>
+@interface WXMRollBannerView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *images;      //轮播的图片数组
 @property (nonatomic, strong) UILabel *describeLabel;      //图片描述控件，默认在底部
@@ -31,7 +31,7 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
 @property (nonatomic, strong) UIImage *placeImage;         //占位图
 @end
 
-@implementation RollBanner
+@implementation WXMRollBannerView
 /** 创建缓存图片的文件夹 */
 + (void)initialize {
     NSFileManager * m = [NSFileManager defaultManager];
@@ -48,12 +48,12 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
     if (self = [super initWithFrame:frame]) self.imageArray = imageArray;
     return self;
 }
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<RollBannerTouchProtocol>)delegate {
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<WXMRollBannerTouchProtocol>)delegate {
     if (self = [super initWithFrame:frame]) self.delegate = delegate;
     return self;
 }
 + (instancetype)carouselViewWithImageArray:(NSArray *)imageArray describeArray:(NSArray *)describeArray {
-    RollBanner *adView = [[self alloc] initWithFrame:CGRectMake(0, 0, KWidth, DefaultHeight)];
+    WXMRollBannerView *adView = [[self alloc] initWithFrame:CGRectMake(0, 0, KWidth, DefaultHeight)];
     adView.imageArray = imageArray;
     adView.describeArray = describeArray;
     return adView;
