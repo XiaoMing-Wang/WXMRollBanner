@@ -7,8 +7,9 @@
 //
 #import <UIKit/UIKit.h>
 
-@protocol RollBannerTouchProtocol <NSObject>
-- (void)rollBannertouchEvents:(NSInteger)index;
+@protocol WXMRollBannerTouchProtocol <NSObject>
+- (void)wxmRollBannertouchEvents:(NSInteger)index;
+- (void)wxmRollBannerEvents:(id)object;
 @end
 
 typedef enum {
@@ -26,12 +27,11 @@ typedef enum {
     ChangeModeFade     /** 淡入淡出 */
 } ChangeMode;
 
-@interface RollBanner : UIView
+@interface WXMRollBanner : UIView
 
 #pragma mark 属性
-
-@property (nonatomic, copy) NSString* cacheKey;                       /** 缓存key */
-@property (nonatomic, weak) id <RollBannerTouchProtocol>delegate;     /** 代理 */
+@property (nonatomic, copy) NSString *cacheKey;                       /** 缓存key */
+@property (nonatomic, weak) id <WXMRollBannerTouchProtocol>delegate;  /** 代理 */
 @property (nonatomic, assign) ChangeMode changeMode;                  /** 图片切换的模式 */
 @property (nonatomic, assign) PageControlPosition pagePosition;       /** 分页控件位置 */
 @property (nonatomic, strong) NSArray *imageArray;                    /** 轮播的图片数组 */
@@ -40,16 +40,23 @@ typedef enum {
 @property (nonatomic, copy) void (^imageClickBlock)(NSInteger index); /** 点击图片后要执行的操作 */
 
 #pragma mark 构造方法
-- (instancetype)initWithFrame:(CGRect)frame imageArray:(NSArray *)imageArray;
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<RollBannerTouchProtocol>)delegate;
-+ (instancetype)carouselViewWithImageArray:(NSArray *)imageArray describeArray:(NSArray *)describeArray;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<WXMRollBannerTouchProtocol>)delegate;
 
 #pragma mark 方法
-- (void)startTimer;                                                                /** 开启定时器 */
-- (void)stopTimer;                                                                 /** 停止定时器 */
-- (void)setPageImage:(UIImage *)image andCurrentPageImage:(UIImage *)currentImage; /** 设置分页控件指示器的图片 */
-- (void)setPageColor:(UIColor *)color andCurrentPageColor:(UIColor *)currentColor; /** 设置分页控件指示器的颜色 */
+
+/** 开启定时器 */
+- (void)startTimer;
+
+/** 停止定时器 */
+- (void)stopTimer;
+
+/** 设置分页控件指示器的图片 */
+- (void)setPageImage:(UIImage *)image andCurrentPageImage:(UIImage *)currentImage;
+
+/** 设置分页控件指示器的颜色 */
+- (void)setPageColor:(UIColor *)color andCurrentPageColor:(UIColor *)currentColor;
 - (void)setDescribeTextColor:(UIColor *)color font:(UIFont *)font bgColor:(UIColor *)bgColor;
-- (void)clearDiskCache; /** 清除沙盒中的图片和plist缓存 */
-- (void)setImageArray:(NSArray<NSObject *> *)imgArray primaryKey:(NSString *)primaryKey;
+
+/** 清除沙盒中的图片和plist缓存 */
+- (void)clearDiskCache;
 @end
