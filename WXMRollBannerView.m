@@ -55,7 +55,7 @@ static inline UIImage *COLORTOIMAGE() {
 + (void)initialize {
     NSFileManager * m = [NSFileManager defaultManager];
     NSString *cache = [KLibraryboxPath stringByAppendingPathComponent:WXMRollBannerCache];
-    NSLog(@"______%@",cache);
+    /** NSLog(@"______%@",cache); */
     BOOL isDir = NO;
     BOOL isExists = [m fileExistsAtPath:cache isDirectory:&isDir];
     if (!isExists || !isDir) {
@@ -123,7 +123,6 @@ static inline UIImage *COLORTOIMAGE() {
             NSString *cache = [KLibraryboxPath stringByAppendingPathComponent:WXMRollBannerCache];
             NSString *plist = [NSString stringWithFormat:@"%@.plist",WXMROLL_BANNER_LIST];
             NSString *filePath= [cache stringByAppendingPathComponent:plist];
-            
             NSMutableDictionary *dicts = [NSDictionary dictionaryWithContentsOfFile:filePath].
             mutableCopy;
             if (!dicts) dicts = @{}.mutableCopy;
@@ -235,7 +234,6 @@ static inline UIImage *COLORTOIMAGE() {
 
 - (void)nextPage {
     if (_changeMode == ChangeModeFade) {
-        
         self.nextIndex = (self.currIndex + 1) % _images.count;
         self.otherImageView.image = _images[_nextIndex];
         [UIView animateWithDuration:1.2 animations:^{
@@ -271,7 +269,6 @@ static inline UIImage *COLORTOIMAGE() {
     }
 }
 
-#pragma mark __________________________________________________________  下载网络图片
 - (void)downloadImages:(NSUInteger)index {
     NSString *key = _imageArray[index];
     NSString *path = [[KLibraryboxPath stringByAppendingPathComponent:@"WXMRollBannerViewCache"]

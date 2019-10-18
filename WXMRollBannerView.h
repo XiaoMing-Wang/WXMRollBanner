@@ -39,10 +39,7 @@ typedef enum {
 @property (nonatomic, assign) NSTimeInterval time;                    /** 停留时间默认为5s，最少2s */
 @property (nonatomic, copy) void (^imageClickBlock)(NSInteger index); /** 点击图片后要执行的操作 */
 
-#pragma mark 构造方法
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<WXMRollBannerTouchProtocol>)delegate;
-
-#pragma mark 方法
 
 /** 开启定时器 */
 - (void)startTimer;
@@ -59,4 +56,5 @@ typedef enum {
 
 /** 清除沙盒中的图片和plist缓存 */
 - (void)clearDiskCache;
+
 @end
