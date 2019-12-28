@@ -82,7 +82,7 @@ static inline UIImage *COLORTOIMAGE() {
     
     NSString *cache = [KLibraryboxPath stringByAppendingPathComponent:WXMRollBannerCache];
     NSString *plist = [NSString stringWithFormat:@"%@.plist",WXMROLL_BANNER_LIST];
-    NSString *filePath= [cache stringByAppendingPathComponent:plist];
+    NSString *filePath = [cache stringByAppendingPathComponent:plist];
     NSMutableDictionary *dicts = [NSDictionary dictionaryWithContentsOfFile:filePath].mutableCopy;
     NSArray *imageArray = [dicts objectForKey:cacheKey];
     if (!imageArray.count || !imageArray) imageArray = @[COLORTOIMAGE()];
@@ -264,8 +264,8 @@ static inline UIImage *COLORTOIMAGE() {
 
 - (void)imageClick {
     if (self.imageClickBlock) self.imageClickBlock(self.currIndex);
-    if (self.delegate && [self.delegate respondsToSelector:@selector(wxmRollBannertouchEvents:)]) {
-        [self.delegate wxmRollBannertouchEvents:self.currIndex];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rollBannertouchEvents:)]) {
+        [self.delegate rollBannertouchEvents:self.currIndex];
     }
 }
 
@@ -403,8 +403,8 @@ static inline UIImage *COLORTOIMAGE() {
         _scrollView.delegate = self;
         [_scrollView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick)]];
         _currImageView = [[UIImageView alloc] init];
-        [_scrollView addSubview:_currImageView];
         _otherImageView = [[UIImageView alloc] init];
+        [_scrollView addSubview:_currImageView];
         [_scrollView addSubview:_otherImageView];
     }
     return _scrollView;

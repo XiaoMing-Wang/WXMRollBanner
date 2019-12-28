@@ -40,16 +40,19 @@ typedef enum {
 @property (nonatomic, copy) void (^imageClickBlock)(NSInteger index); /** 点击图片后要执行的操作 */
 
 #pragma mark 构造方法
-- (instancetype)initWithFrame:(CGRect)frame imageArray:(NSArray *)imageArray;
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<WXMRollBannerTouchProtocol>)delegate;
-+ (instancetype)carouselViewWithImageArray:(NSArray *)imageArray describeArray:(NSArray *)describeArray;
 
 #pragma mark 方法
 - (void)startTimer;                                                                /** 开启定时器 */
 - (void)stopTimer;                                                                 /** 停止定时器 */
-- (void)setPageImage:(UIImage *)image andCurrentPageImage:(UIImage *)currentImage; /** 设置分页控件指示器的图片 */
-- (void)setPageColor:(UIColor *)color andCurrentPageColor:(UIColor *)currentColor; /** 设置分页控件指示器的颜色 */
+/** 设置分页控件指示器的图片 */
+- (void)setPageImage:(UIImage *)image andCurrentPageImage:(UIImage *)currentImage;
+
+/** 设置分页控件指示器的颜色 */
+- (void)setPageColor:(UIColor *)color andCurrentPageColor:(UIColor *)currentColor;
 - (void)setDescribeTextColor:(UIColor *)color font:(UIFont *)font bgColor:(UIColor *)bgColor;
-- (void)clearDiskCache; /** 清除沙盒中的图片和plist缓存 */
+
+/** 清除沙盒中的图片和plist缓存 */
+- (void)clearDiskCache;
 - (void)setImageArray:(NSArray<NSObject *> *)imgArray primaryKey:(NSString *)primaryKey;
 @end
