@@ -32,6 +32,7 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
 @end
 
 @implementation WXMRollBannerView
+
 /** 创建缓存图片的文件夹 */
 + (void)initialize {
     NSFileManager * m = [NSFileManager defaultManager];
@@ -44,28 +45,35 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
 }
 
 #pragma mark __________________________________________________________ 构造方法
+
 - (instancetype)initWithFrame:(CGRect)frame imageArray:(NSArray *)imageArray {
     if (self = [super initWithFrame:frame]) self.imageArray = imageArray;
     return self;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<WXMRollBannerTouchProtocol>)delegate {
     if (self = [super initWithFrame:frame]) self.delegate = delegate;
     return self;
 }
+
 + (instancetype)carouselViewWithImageArray:(NSArray *)imageArray describeArray:(NSArray *)describeArray {
     WXMRollBannerView *adView = [[self alloc] initWithFrame:CGRectMake(0, 0, KWidth, DefaultHeight)];
     adView.imageArray = imageArray;
     adView.describeArray = describeArray;
     return adView;
 }
+
 #pragma mark __________________________________________________________ 设置相关方法
+
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     [self addSubview:self.scrollView];
     [self addSubview:self.describeLabel];
     [self addSubview:self.pageControl];
 }
+
 #pragma mark __________________________________________________________  设置图片数组
+
 - (void)setImageArray:(NSArray<NSObject *> *)imgArray primaryKey:(NSString *)primaryKey {
     if (imgArray.count <= 0) return;
     NSMutableArray * imageArray = @[].mutableCopy;
@@ -130,6 +138,7 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
 }
 
 #pragma mark __________________________________________________________  contentSize
+
 - (void)setScrollViewContentSize {
     if (_images.count > 1) {
         self.scrollView.contentSize = CGSizeMake(self.width * 4, 0);
@@ -285,7 +294,7 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
         _images[index] = [UIImage imageWithData:data];
         return;
     }
-    //下载图片
+    /**  下载图片 */
     NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^{
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:key]];
         if (!data) return;
@@ -304,6 +313,7 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
 }
 
 #pragma mark __________________________________________________________   清除沙盒中的图片缓存
+
 - (void)clearDiskCache {
     NSString *cache = [KLibraryboxPath stringByAppendingPathComponent:@"RollBannerViewCache"];
     NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cache error:NULL];
@@ -379,26 +389,32 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
         self.describeLabel.text = self.describeArray[self.currIndex];
     });
 }
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self stopTimer];
 }
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     [self startTimer];
 }
+
 #pragma mark __________________________________________________________  frame相关
 
 - (CGFloat)height {
     return self.scrollView.frame.size.height;
 }
+
 - (CGFloat)width {
     return self.scrollView.frame.size.width;
 }
+
 #pragma mark __________________________________________________________  懒加载
 
 - (NSOperationQueue *)queue {
     if (!_queue) _queue = [[NSOperationQueue alloc] init];
     return _queue;
 }
+
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
@@ -415,6 +431,7 @@ NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).f
     }
     return _scrollView;
 }
+
 - (UILabel *)describeLabel {
     if (!_describeLabel) {
         _describeLabel = [[UILabel alloc] init];

@@ -31,7 +31,7 @@ typedef enum {
 #pragma mark 属性
 
 @property (nonatomic, copy) NSString* cacheKey;                       /** 缓存key */
-@property (nonatomic, weak) id <WXMRollBannerTouchProtocol>delegate;     /** 代理 */
+@property (nonatomic, weak) id <WXMRollBannerTouchProtocol>delegate;  /** 代理 */
 @property (nonatomic, assign) ChangeMode changeMode;                  /** 图片切换的模式 */
 @property (nonatomic, assign) PageControlPosition pagePosition;       /** 分页控件位置 */
 @property (nonatomic, strong) NSArray *imageArray;                    /** 轮播的图片数组 */
